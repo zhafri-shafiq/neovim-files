@@ -1,9 +1,9 @@
 return {
-	-- { -- QoL features for folding
-	-- 	"chrisgrieser/nvim-origami",
-	-- 	event = "VeryLazy",
-	-- 	opts = true,
-	-- },
+	{ -- QoL features for folding
+		"chrisgrieser/nvim-origami",
+		event = "VeryLazy",
+		opts = true,
+	},
 	{ -- use LSP as folding provider
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
@@ -68,12 +68,14 @@ return {
 			},
 			open_fold_hl_timeout = 800,
 			provider_selector = function(_, ft, buftype)
+				print("File type: " .. ft)
 				-- PERF disable folds on `log`, and only use `indent` for `bib` files
-				if ft == "log" then
+				if ft == "log" or ft == "txt" then
+					vim.b[0].ufo_fold_provider = nil
 					return ""
 				end
 				-- ufo accepts only two kinds as priority, see https://github.com/kevinhwang91/nvim-ufo/issues/256
-				local useIndent = { "csv", "applescript", "conf", "" }
+				local useIndent = { "csv", "applescript", "conf", "tf", "" }
 				if buftype ~= "" or vim.startswith(ft, "git") or vim.tbl_contains(useIndent, ft) then
 					return "indent"
 				end
