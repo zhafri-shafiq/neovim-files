@@ -1,9 +1,4 @@
 return {
-	{ -- QoL features for folding
-		"chrisgrieser/nvim-origami",
-		event = "VeryLazy",
-		opts = true,
-	},
 	{ -- use LSP as folding provider
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
@@ -67,19 +62,23 @@ return {
 				-- use `:UfoInspect` to get see available fold kinds
 			},
 			open_fold_hl_timeout = 800,
-			provider_selector = function(_, ft, buftype)
-				print("File type: " .. ft)
-				-- PERF disable folds on `log`, and only use `indent` for `bib` files
-				if ft == "log" or ft == "txt" then
-					vim.b[0].ufo_fold_provider = nil
+			provider_selector = function(bufnr, ft, buftype)
+				-- Disable folds for certain filetypes
+				if ft == "log" or ft == "txt" or ft == "tpl" then
 					return ""
 				end
+				-- Use indent for big files or node_modules
+				local filepath = vim.api.nvim_buf_get_name(bufnr)
+				if filepath:match("node_modules") then
+					return "indent"
+				end
 				-- ufo accepts only two kinds as priority, see https://github.com/kevinhwang91/nvim-ufo/issues/256
-				local useIndent = { "csv", "applescript", "conf", "tf", "" }
+				local useIndent = { "csv", "applescript", "conf", "tf", "tmux", "" }
 				if buftype ~= "" or vim.startswith(ft, "git") or vim.tbl_contains(useIndent, ft) then
 					return "indent"
 				end
-				return { "lsp", "treesitter" }
+				-- Fallback to indent if no LSP or treesitter available
+				return { "lsp", "indent" }
 			end,
 			-- show folds with number of folded lines instead of just the icon
 			fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
