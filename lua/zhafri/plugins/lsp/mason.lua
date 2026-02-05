@@ -25,10 +25,13 @@ return {
 		})
 
 		mason_lspconfig.setup({
+			-- automatically enable installed servers via vim.lsp.enable()
+			automatic_enable = true,
 			-- list of servers for mason to install
 			ensure_installed = {
 				"ansiblels",
 				"cssls",
+				-- "dartls", -- use flutter-tools or dart SDK directly
 				"docker_compose_language_service",
 				"dockerls",
 				"emmet_ls",
@@ -53,7 +56,7 @@ return {
 				"tsp_server",
 				"ts_ls",
 				"vimls",
-				"volar",
+				-- "volar",
 				"yamlls",
 			},
 		})
