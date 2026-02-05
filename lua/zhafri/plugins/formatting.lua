@@ -25,6 +25,12 @@ return {
 				sql = { "sqlfmt" },
 				xml = { "xmlformatter" },
 			},
+			formatters = {
+				prettier = {
+					-- Use Mason's prettier instead of project's node_modules
+					command = vim.fn.stdpath("data") .. "/mason/bin/prettier",
+				},
+			},
 			format_on_save = {
 				lsp_fallback = true,
 				async = false,
