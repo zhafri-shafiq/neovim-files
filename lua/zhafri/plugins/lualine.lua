@@ -72,6 +72,10 @@ return {
           { "filetype" },
         },
       },
+      tabline = {
+        lualine_a = { "buffers" },
+        lualine_z = { "tabs" },
+      },
     })
   end,
 }

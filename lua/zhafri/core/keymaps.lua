@@ -58,26 +58,10 @@ keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current c
 -- restart lsp servers
 keymap.set("n", "<leader>rs", "<cmd>:LspRestart<cr>") -- mapping to restart lsp if necessary
 
--- barbar tabline
-keymap.set("n", "<leader>bx", "<cmd>BufferClose<cr>") -- close tab
-keymap.set("n", "<leader>bn", "<cmd>BufferNext<cr>") -- go to next tab
-keymap.set("n", "<leader>bp", "<cmd>BufferPrevious<cr>") -- go to previous tab
-keymap.set("n", "<leader>b-", "<cmd>BufferMovePrevious<cr>") -- move to previous tab
-keymap.set("n", "<leader>b+", "<cmd>BufferMoveNext<cr>") -- move to next tab
-keymap.set("n", "<leader>b1", "<cmd>BufferGoto 1<cr>")
-keymap.set("n", "<leader>b2", "<cmd>BufferGoto 2<cr>")
-keymap.set("n", "<leader>b3", "<cmd>BufferGoto 3<cr>")
-keymap.set("n", "<leader>b4", "<cmd>BufferGoto 4<cr>")
-keymap.set("n", "<leader>b5", "<cmd>BufferGoto 5<cr>")
-keymap.set("n", "<leader>b6", "<cmd>BufferGoto 6<cr>")
-keymap.set("n", "<leader>b7", "<cmd>BufferGoto 7<cr>")
-keymap.set("n", "<leader>b8", "<cmd>BufferGoto 8<cr>")
-keymap.set("n", "<leader>b9", "<cmd>BufferGoto 9<cr>")
-keymap.set("n", "<leader>b0", "<cmd>BufferLast<cr>")
-keymap.set("n", "<leader>bcac", "<cmd>BufferCloseAllButCurrent<cr>")
-keymap.set("n", "<leader>bcr", "<cmd>BufferCloseBuffersRight<cr>")
-keymap.set("n", "<leader>bcl", "<cmd>BufferCloseBuffersLeft<cr>")
-keymap.set("n", "<leader>bcaa", "<cmd>BufferCloseAll<cr>")
+-- buffer management (native vim)
+keymap.set("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next buffer" })
+keymap.set("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
+keymap.set("n", "<leader>bx", "<cmd>bdelete<cr>", { desc = "Close buffer" })
 
 -- keymap.set(
 -- 	"v",
